@@ -1,0 +1,25 @@
+{
+  "$GMParticleSystem":"",
+  "%Name":"ps_fagulha",
+  "backdropHeight":18,
+  "backdropImageOpacity":0.5,
+  "backdropImagePath":"C:\\Users\\gLAUBER\\Documents\\GameMakerStudio2\\JOGOS\\Tintaforma\\Materiais e créditos\\Assets\\Cenário\\Decoração\\Tocha.gif",
+  "backdropWidth":6,
+  "backdropXOffset":0.0,
+  "backdropYOffset":0.0,
+  "drawOrder":0,
+  "emitters":[
+    {"$GMPSEmitter":"","%Name":"em_fagulha","additiveBlend":false,"directionIncrease":0.0,"directionMax":120.0,"directionMin":80.0,"directionWiggle":30.0,"distribution":0,"editorColour":1090519039,"editorDrawShape":true,"emitCount":-10,"emitDelayMax":0.0,"emitDelayMin":0.0,"emitDelayUnits":0,"emitIntervalMax":4.0,"emitIntervalMin":2.0,"emitIntervalUnits":1,"enabled":true,"endColour":4280427186,"GMPresetName":null,"gravityDirection":270.0,"gravityForce":0.0,"headPosition":0.0,"lifetimeMax":80.0,"lifetimeMin":50.0,"linkedEmitter":null,"locked":false,"midColour":4281374463,"mode":0,"name":"em_fagulha","orientationIncrease":0.0,"orientationMax":0.0,"orientationMin":119.0,"orientationRelative":false,"orientationWiggle":0.0,"regionH":4.3710165,"regionW":2.1385689,"regionX":0.0,"regionY":0.0,"resourceType":"GMPSEmitter","resourceVersion":"2.0","scaleX":0.1,"scaleY":0.1,"shape":0,"sizeIncrease":-0.003,"sizeMax":0.3,"sizeMin":0.3,"sizeWiggle":0.0,"spawnOnDeathCount":1,"spawnOnDeathGMPreset":null,"spawnOnDeathId":null,"spawnOnUpdateCount":1,"spawnOnUpdateGMPreset":null,"spawnOnUpdateId":null,"speedIncrease":0.01,"speedMax":0.1,"speedMin":0.1,"speedWiggle":0.2,"spriteAnimate":false,"spriteId":null,"spriteRandom":false,"spriteStretch":true,"startColour":4289914367,"texture":1,},
+  ],
+  "name":"ps_fagulha",
+  "parent":{
+    "name":"Particle Systems",
+    "path":"folders/Particle Systems.yy",
+  },
+  "resourceType":"GMParticleSystem",
+  "resourceVersion":"2.0",
+  "showBackdrop":true,
+  "showBackdropImage":true,
+  "xorigin":0,
+  "yorigin":0,
+}

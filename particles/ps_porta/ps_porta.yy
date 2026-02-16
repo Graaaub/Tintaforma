@@ -1,0 +1,25 @@
+{
+  "$GMParticleSystem":"",
+  "%Name":"ps_porta",
+  "backdropHeight":32,
+  "backdropImageOpacity":0.5,
+  "backdropImagePath":"C:\\Users\\gLAUBER\\Documents\\GameMakerStudio2\\JOGOS\\Tintaforma\\Materiais e créditos\\Assets\\Cenário\\Itens\\Porta.png",
+  "backdropWidth":21,
+  "backdropXOffset":0.0,
+  "backdropYOffset":0.0,
+  "drawOrder":0,
+  "emitters":[
+    {"$GMPSEmitter":"","%Name":"Emitter","additiveBlend":false,"directionIncrease":0.0,"directionMax":100.0,"directionMin":80.0,"directionWiggle":0.0,"distribution":0,"editorColour":1090519039,"editorDrawShape":true,"emitCount":2,"emitDelayMax":0.0,"emitDelayMin":0.0,"emitDelayUnits":0,"emitIntervalMax":0.0,"emitIntervalMin":0.0,"emitIntervalUnits":0,"enabled":true,"endColour":4294967295,"GMPresetName":null,"gravityDirection":263.0,"gravityForce":0.0,"headPosition":0.0,"lifetimeMax":15.0,"lifetimeMin":10.0,"linkedEmitter":null,"locked":false,"midColour":4294967295,"mode":0,"name":"Emitter","orientationIncrease":0.0,"orientationMax":0.0,"orientationMin":0.0,"orientationRelative":false,"orientationWiggle":0.0,"regionH":1.2262802,"regionW":22.637466,"regionX":0.0,"regionY":-15.0,"resourceType":"GMPSEmitter","resourceVersion":"2.0","scaleX":0.1,"scaleY":0.1,"shape":0,"sizeIncrease":-0.02,"sizeMax":0.0,"sizeMin":1.5,"sizeWiggle":0.0,"spawnOnDeathCount":1,"spawnOnDeathGMPreset":null,"spawnOnDeathId":null,"spawnOnUpdateCount":1,"spawnOnUpdateGMPreset":null,"spawnOnUpdateId":null,"speedIncrease":-1.0,"speedMax":0.0,"speedMin":0.0,"speedWiggle":0.0,"spriteAnimate":false,"spriteId":null,"spriteRandom":false,"spriteStretch":true,"startColour":4294967295,"texture":1,},
+  ],
+  "name":"ps_porta",
+  "parent":{
+    "name":"Particle Systems",
+    "path":"folders/Particle Systems.yy",
+  },
+  "resourceType":"GMParticleSystem",
+  "resourceVersion":"2.0",
+  "showBackdrop":true,
+  "showBackdropImage":true,
+  "xorigin":0,
+  "yorigin":16,
+}
