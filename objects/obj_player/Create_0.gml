@@ -34,6 +34,9 @@ paint   = false
 
 // variavel que armazena quantas chaves o jogador tem
 chaves = 0
+// pulos
+qtd_pulo = 2
+atual_qtd_pulo = qtd_pulo
 
 
 lista_sprites = [spr_player_move_idle, spr_player_idle]
@@ -123,7 +126,7 @@ mapear_teclas = function()
     right   = keyboard_check(vk_right)
     left    = keyboard_check(vk_left)
     down    = keyboard_check(vk_down)
-    jump    = keyboard_check(vk_space)
+    jump    = keyboard_check_pressed(vk_space)
     jump_r  = keyboard_check_released(vk_space)
     paint   = keyboard_check_pressed(ord("E"))
 }
@@ -142,17 +145,14 @@ checa_chao = function()
 // metodo para pular
 pular = function()
 {
-    if tocando_no_chao
-    { 
-        // define a velocidade que o jogador vai pular
-        velv = -max_velv
-        
-        // cria a particula de pulo
-        instance_create_depth(x, y, depth - 1, obj_partic_pular)
-         
-        // faz o efeito de mola
-        efeito_squash(0.8, 1.3 )
-    }
+    // define a velocidade que o jogador vai pular
+    velv = -max_velv
+    
+    // cria a particula de pulo
+    instance_create_depth(x, y, depth - 1, obj_partic_pular)
+    
+    // faz o efeito de mola
+    efeito_squash(0.8, 1.3)
 }
 
 mudar_animacao = function(_sprite_index = spr_parede)
@@ -292,6 +292,14 @@ estado_pulo = function()
 {
     aplica_velocidade()
     
+    static _inicio_pulo = true
+    if _inicio_pulo
+    {
+        atual_qtd_pulo--   
+        // desativa a variavel
+        _inicio_pulo = false
+    }
+    
     // se eu bater em alguma coisa com a cabeça
     var _layer = layer_tilemap_get_id("tl_level")
     var _colisoes = [obj_parede, _layer]
@@ -346,9 +354,24 @@ estado_pulo = function()
         }
     }
     
+    // se o jogador pulou e tem pulos restantes
+    if jump and atual_qtd_pulo > 0
+    {
+        
+        // pula
+        pular()
+        // perde um pulo
+        atual_qtd_pulo--
+    }
+    
     // se o jogador tocou no chão
     if tocando_no_chao
     {
+        // ativa o pulo
+        _inicio_pulo = true
+        // reinicia o pulo duplo
+        atual_qtd_pulo = qtd_pulo
+        
         // volta para o estado de parado
         troca_estado(estado_parado, [spr_player_end_jump, spr_player_idle])
         
