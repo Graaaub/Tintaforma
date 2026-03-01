@@ -172,16 +172,10 @@ anim_terminou = function(_estado = noone)
     }
 }
 
-// estado do jogador parado
-estado_parado = function()
-{  
-    aplica_velocidade()
-    
-    // executa o metodo de mudar a animação
-    //mudar_animacao(spr_player_idle)
-    
-    //muda para a animimação da lista de sprites
-    mudar_animacao(lista_sprites[indice_sprite])    
+// metodo para fazer a transição dos sprites
+transicao_sprites = function()
+{
+    mudar_animacao(lista_sprites[indice_sprite])
     
     // se a animação terminou
     if anim_terminou()
@@ -198,19 +192,28 @@ estado_parado = function()
         }
         
     }
+}
+
+troca_estado = function(_estado = estado_parado, _lista = spr_player_idle)
+{
+    estado = _estado
+    indice_sprite = 0
+    lista_sprites = _lista
+}
+
+// estado do jogador parado
+estado_parado = function()
+{  
+    aplica_velocidade()
     
-    if right xor left
-    {
-        estado = estado_movendo
-    }
+    // executa o metodo de mudar a animação
+    //mudar_animacao(spr_player_idle)
+    transicao_sprites()
     
-    if down
+    // se alguma dessas teclas foi pressionada
+    if right != left
     {
-        if array_contains(colisoes, obj_parede_oneway)
-        {
-            var _index = array_get_index(colisoes, obj_parede_oneway)
-            array_delete(colisoes, _index, 1)
-        }
+        troca_estado(estado_movendo, [spr_player_idle_move, spr_player_move])
     }
     
     // se apertar espaço
@@ -219,8 +222,7 @@ estado_parado = function()
         // executa o metodo de pular
         pular()
         
-        // entra no estado de pulo
-        estado = estado_pulo
+        troca_estado(estado_pulo, [spr_player_start_jump, spr_player_jump_cima])
     }
     
     // se o jogador estiver parado, mas não estiver tocando no chão
@@ -247,13 +249,13 @@ estado_movendo = function()
 {
     aplica_velocidade()
     
-    // executa o metodo de mudar a animação
-    mudar_animacao(spr_player_move)
+    // muda para a animação de andando
+    transicao_sprites()
     
     // se o jogador está parado (velocidade 0)
     if velh == 0
     {
-        estado = estado_parado
+        troca_estado(estado_parado, [spr_player_move_idle, spr_player_idle])
     }
     
     // se o jogador estiver andando
@@ -270,8 +272,7 @@ estado_movendo = function()
         // executa o metodo de pular
         pular()
         
-        // entra no estado de pulo
-        estado = estado_pulo
+        troca_estado(estado_pulo, [spr_player_start_jump, spr_player_jump_cima])
     }
     
     // se o jogador apertar a tecla de paint
@@ -299,7 +300,9 @@ estado_pulo = function()
     if velv < 0
     {
         // executa o metodo de mudar a animação
-        mudar_animacao(spr_player_jump_cima)
+        //mudar_animacao(spr_player_jump_cima)
+        
+        transicao_sprites()
         
         // se o objeto parede oneway está dento da array de colisções
         if array_contains(colisoes, obj_parede_oneway)
@@ -311,8 +314,11 @@ estado_pulo = function()
     // se não, é positiva (caindo)
     else
     {
+        // troca a lista de sprite
+        lista_sprites = [spr_player_jump_fall, spr_player_jump_baixo]
     	// executa o metodo de mudar a animação
-        mudar_animacao(spr_player_jump_baixo)
+        //mudar_animacao(spr_player_jump_baixo)
+        transicao_sprites()
         
         if !place_meeting(x, y, obj_parede_oneway)
         {
@@ -334,7 +340,7 @@ estado_pulo = function()
     if tocando_no_chao
     {
         // volta para o estado de parado
-        estado = estado_parado
+        troca_estado(estado_parado, [spr_player_end_jump, spr_player_idle])
         
         // cria a particula de pouso
         instance_create_depth(x, y, depth - 1, obj_partic_cair)
@@ -387,7 +393,7 @@ estado_powerup_fim = function()
     if anim_terminou()
     {
         // muda o estado
-        estado = estado_parado
+        troca_estado(estado_parado, [spr_player_idle])
         powerup_tinta = true
     }
 }
@@ -409,13 +415,14 @@ estado_tinta_entrar = function()
     if anim_terminou()
     {
         // muda o estado
-        estado = estado_tinta_loop
+        troca_estado(estado_tinta_loop, [spr_player_tinta_start, spr_player_tinta_loop])
     }
 }
 
 estado_tinta_loop = function()
 {
-    mudar_animacao(spr_player_tinta_loop)
+    //mudar_animacao(spr_player_tinta_loop)
+    transicao_sprites()
     
     // muda a mascara de colisão do jogador
     mask_index = spr_player_tinta_loop
@@ -438,7 +445,7 @@ estado_tinta_loop = function()
     if paint and !place_meeting(x, y - 24, colisoes)
     {
         // muda o estado
-        estado = estado_tinta_sair 
+        troca_estado(estado_tinta_sair, [spr_player_tinta_end, spr_player_tinta_sair])
         
         //zerando as velocidades
         velv = 0
@@ -448,7 +455,8 @@ estado_tinta_loop = function()
 
 estado_tinta_sair = function()
 {
-    mudar_animacao(spr_player_tinta_sair)
+    //mudar_animacao(spr_player_tinta_sair)
+    transicao_sprites()
     
     // volta a mascara de colisão para o normal
     mask_index = spr_player_idle
@@ -464,7 +472,7 @@ estado_tinta_sair = function()
     if anim_terminou()
     {
         // muda o estado
-        estado = estado_parado
+        troca_estado(estado_parado, [spr_player_idle])
     }
 }
 

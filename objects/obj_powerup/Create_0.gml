@@ -10,8 +10,8 @@ ir_para_jogador = function ()
     if !alvo 
         return;
     
-    x = alvo.x
-    y = alvo.y - 40
+    x = lerp(x, alvo.x, .1)
+    y = lerp(y, alvo.y - 40, .1)
 }
 
 explosao = function ()
