@@ -26,10 +26,11 @@ tocando_no_chao = false
 // variavel que armazena se o jogador está na tinta
 tocando_tinta = false
 
-right = false
-left  = false
-jump  = false
-paint = false
+right   = false
+left    = false
+jump    = false
+jump_r  = false
+paint   = false
 
 // variavel que armazena quantas chaves o jogador tem
 chaves = 0
@@ -113,15 +114,18 @@ movimento = function()
 // metodo de pegar os inputs do jogador
 mapear_teclas = function()
 {
-    keyboard_set_map(ord("A"), vk_left);
-    keyboard_set_map(ord("D"), vk_right);
-    keyboard_set_map(ord("S"), vk_down);
+    keyboard_set_map(ord("A"), vk_left)
+    keyboard_set_map(ord("D"), vk_right)
+    keyboard_set_map(ord("W"), vk_space)
+    keyboard_set_map(vk_up, vk_space)
+    keyboard_set_map(ord("S"), vk_down)
     
-    right = keyboard_check(vk_right)
-    left = keyboard_check(vk_left)
-    down = keyboard_check(vk_down)
-    jump = keyboard_check(vk_space)
-    paint = keyboard_check_pressed(ord("E"))
+    right   = keyboard_check(vk_right)
+    left    = keyboard_check(vk_left)
+    down    = keyboard_check(vk_down)
+    jump    = keyboard_check(vk_space)
+    jump_r  = keyboard_check_released(vk_space)
+    paint   = keyboard_check_pressed(ord("E"))
 }
 
 // metodo para checar se o jogador está tocando no cão
@@ -309,6 +313,12 @@ estado_pulo = function()
         {
             var _index = array_get_index(colisoes, obj_parede_oneway)
             array_delete(colisoes, _index, 1)
+        }
+        
+        // se o jogador apertou o botão de pular
+        if jump_r
+        {
+            velv *= 0.5
         }
     }
     // se não, é positiva (caindo)
